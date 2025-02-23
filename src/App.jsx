@@ -17,6 +17,7 @@ const API_OPTIONS = {
 }
 
 const App = () => {
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [movieList, setMovieList] = useState([]);
@@ -76,9 +77,18 @@ const App = () => {
   useEffect(() => {
     loadTrendingMovies();
   }, [])
+
+  useEffect(() => {
+    if (searchTerm && movieList.length > 0) {
+      document.title = `${searchTerm} - Film Finder`;
+    } else {
+      document.title = 'Film Finder';
+    }
+  }, [searchTerm, movieList, trendingMovies]);
   
   return (
     <main>
+      
       <div className="pattern" />
       <div className="wrapper">
         <header>
